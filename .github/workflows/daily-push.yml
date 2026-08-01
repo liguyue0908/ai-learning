@@ -1,0 +1,26 @@
+name: AI 学习每日推送
+
+on:
+  schedule:
+    # 北京时间 8:00 = UTC 0:00，周一到周五
+    - cron: '0 0 * * 1-5'
+  workflow_dispatch:  # 允许手动触发测试
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Push daily content
+        env:
+          WEIXIN_WEBHOOK: ${{ secrets.WEIXIN_WEBHOOK }}
+        run: python3 generate.py
