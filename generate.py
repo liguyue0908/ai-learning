@@ -18,7 +18,7 @@ WEBHOOK_URL = os.environ.get("WEIXIN_WEBHOOK", "")
 UPLOAD_URL = WEBHOOK_URL.replace("/send?", "/upload_media?").replace("send?key=", "upload_media?key=") + "&type=file"
 CONTENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content")
 HTML_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "html")
-START_DATE = date(2026, 8, 4)
+START_DATE = date(2026, 8, 3)
 
 # === CSS ===
 CSS = """
