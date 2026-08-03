@@ -2,7 +2,7 @@
 """
 AI 学习每日推送 — GitHub Actions 版
 每天 UTC 0:00（北京时间 8:00）自动运行
-读取 content/ 目录下的 .md 文件 → 生成 HTML → 企微推送
+读取 content/ → 生成 HTML → 提交到仓库 → 企微推送链接
 """
 
 import json
@@ -13,11 +13,12 @@ import sys
 import time
 from datetime import date, datetime, timedelta
 
-# === 配置（相对路径，适应 GitHub Actions 环境）===
+# === 配置 ===
 WEBHOOK_URL = os.environ.get("WEIXIN_WEBHOOK", "")
-UPLOAD_URL = WEBHOOK_URL.replace("/send?", "/upload_media?").replace("send?key=", "upload_media?key=") + "&type=file"
-CONTENT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "content")
-HTML_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "html")
+PAGES_URL = os.environ.get("PAGES_URL", "https://liguyue0908.github.io/ai-learning")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CONTENT_DIR = os.path.join(BASE_DIR, "content")
+HTML_DIR = os.path.join(BASE_DIR, "html")
 START_DATE = date(2026, 8, 3)
 
 # === CSS ===
@@ -49,10 +50,6 @@ body {
 h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
 h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
 p { margin: 12px 0; }
-.card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin: 20px 0; }
-.card.warn { border-left: 4px solid var(--warning); }
-.card.info { border-left: 4px solid var(--accent); }
-.card.success { border-left: 4px solid var(--success); }
 table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
 th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
 th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
@@ -86,44 +83,12 @@ def log(msg):
 def send_markdown(content):
     payload = {"msgtype": "markdown", "markdown": {"content": content}}
     body = json.dumps(payload, ensure_ascii=False).encode('utf-8')
-    result = subprocess.run(
+    subprocess.run(
         ['curl', '-s', '-X', 'POST', WEBHOOK_URL,
          '-H', 'Content-Type: application/json', '-d', body],
         capture_output=True, text=True, timeout=30
     )
-    ok = '"errcode":0' in result.stdout
-    log(f"Markdown push: {'OK' if ok else result.stdout.strip()}")
-    return ok
-
-
-def upload_file(filepath):
-    result = subprocess.run(
-        ['curl', '-s', '-X', 'POST', UPLOAD_URL,
-         '-F', f'media=@{filepath}'],
-        capture_output=True, text=True, timeout=30
-    )
-    try:
-        data = json.loads(result.stdout)
-        if data.get('errcode') == 0:
-            log(f"File uploaded: {data.get('media_id')}")
-            return data.get('media_id')
-    except Exception:
-        pass
-    log(f"Upload failed: {result.stdout}")
-    return None
-
-
-def send_file(media_id):
-    payload = {"msgtype": "file", "file": {"media_id": media_id}}
-    body = json.dumps(payload, ensure_ascii=False).encode('utf-8')
-    result = subprocess.run(
-        ['curl', '-s', '-X', 'POST', WEBHOOK_URL,
-         '-H', 'Content-Type: application/json', '-d', body],
-        capture_output=True, text=True, timeout=30
-    )
-    ok = '"errcode":0' in result.stdout
-    log(f"File push: {'OK' if ok else result.stdout.strip()}")
-    return ok
+    log("Markdown sent")
 
 
 def get_learning_day(today=None):
@@ -234,12 +199,13 @@ def markdown_to_html(md_content, date_desc, wd):
     w_num, d_num = int(m.group(1)), int(m.group(2))
     day_total = (w_num - 1) * 5 + d_num
     day_num = d_num
+
     progress_dots = ''
     for i in range(1, 6):
         cls = 'done' if i <= day_num else ''
         progress_dots += f'<div class="dot {cls}"></div>'
 
-    week_num = (day_total - 1) // 5 + 1
+    week_num = w_num
 
     html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -266,7 +232,7 @@ def markdown_to_html(md_content, date_desc, wd):
     return html
 
 
-def build_summary(parts, date_desc):
+def build_summary(parts, date_desc, html_url):
     title = "今日学习"
     for part in parts:
         m = re.search(r'^## (.+)', part, re.MULTILINE)
@@ -297,14 +263,68 @@ def build_summary(parts, date_desc):
 ---
 ### 🏋️ {practice_title}
 
-> 💡 预计阅读 30 分钟 · 到公司后 10 分钟实操练习
+[📎 **点击查看完整学习内容**]({html_url})
 
-📎 **点击下方 HTML 文件查看完整学习内容**"""
+> 💡 预计阅读 30 分钟 · 到公司后 10 分钟实操练习"""
+
+
+def commit_and_push(wd):
+    """将生成的 HTML 提交并推送到仓库"""
+    try:
+        subprocess.run(['git', 'config', 'user.name', 'AI Learning Bot'], check=True)
+        subprocess.run(['git', 'config', 'user.email', 'bot@ai-learning.dev'], check=True)
+        subprocess.run(['git', 'add', f'html/{wd}.html', 'html/index.html'], check=True)
+        # 检查是否有变更
+        status = subprocess.run(['git', 'diff', '--cached', '--quiet'], capture_output=True)
+        if status.returncode != 0:
+            subprocess.run(['git', 'commit', '-m', f'Add {wd} [{date.today().isoformat()}]'], check=True)
+            subprocess.run(['git', 'push'], check=True)
+            log(f"Committed and pushed {wd}")
+        else:
+            log("No changes to commit")
+        return True
+    except Exception as e:
+        log(f"Git error: {e}")
+        return False
+
+
+def generate_index_html():
+    """生成索引页"""
+    lessons = []
+    for f in sorted(os.listdir(HTML_DIR)):
+        if f.endswith('.html') and re.match(r'W\d+D\d+\.html', f):
+            lessons.append(f.replace('.html', ''))
+
+    items = ''
+    for wd in sorted(lessons):
+        m = re.match(r'W(\d+)D(\d+)', wd)
+        w, d = int(m.group(1)), int(m.group(2))
+        items += f'<li><a href="{wd}.html">第{w}周 第{d}天</a></li>\n'
+
+    return f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 学习之旅</title>
+<style>
+body{{font-family:-apple-system,"PingFang SC",sans-serif;max-width:640px;margin:40px auto;padding:20px;background:#fafaf9;color:#1c1917}}
+h1{{font-size:28px}}li{{margin:14px 0}}a{{color:#2563eb;font-size:18px;text-decoration:none}}
+a:hover{{text-decoration:underline}}p{{color:#57534e}}
+@media(prefers-color-scheme:dark){{body{{background:#0c0a09;color:#fafaf9}}a{{color:#60a5fa}}p{{color:#a8a29e}}}}
+</style>
+</head>
+<body>
+<h1>📚 AI 学习之旅</h1>
+<p>每天早 8:00 企微推送 · 地铁 30 分钟学习 · 到公司 10 分钟实操</p>
+<ul>{items if items else '<li>内容即将上线...</li>'}</ul>
+</body>
+</html>"""
 
 
 def main():
     if not WEBHOOK_URL:
-        log("ERROR: WEIXIN_WEBHOOK secret not set")
+        log("ERROR: WEIXIN_WEBHOOK not set")
         sys.exit(1)
 
     today = date.today()
@@ -326,7 +346,7 @@ def main():
     content_file = os.path.join(CONTENT_DIR, f"{wd}.md")
     if not os.path.exists(content_file):
         log(f"ERROR: {content_file} not found")
-        send_markdown(f"## ⏰ AI 学习提醒\n\n**{date_desc}** 学习内容准备中...\n\n> 可以先复习前几天内容哦")
+        send_markdown(f"## ⏰ {date_desc} 内容准备中...")
         return
 
     with open(content_file, "r") as f:
@@ -334,6 +354,7 @@ def main():
 
     parts = [p.strip() for p in raw.split('---PART---') if p.strip()]
 
+    # 生成 HTML
     md_for_html = raw.replace('---PART---', '\n\n')
     html_content = markdown_to_html(md_for_html, date_desc, wd)
 
@@ -343,18 +364,20 @@ def main():
         f.write(html_content)
     log(f"HTML: {len(html_content)} bytes")
 
-    media_id = upload_file(html_path)
+    # 更新索引页
+    index_path = os.path.join(HTML_DIR, "index.html")
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(generate_index_html())
 
-    summary = build_summary(parts, date_desc)
+    # 提交到仓库 → GitHub Pages 自动发布
+    commit_and_push(wd)
+
+    # 发送企微摘要（含链接）
+    html_url = f"{PAGES_URL}/html/{wd}.html"
+    summary = build_summary(parts, date_desc, html_url)
     send_markdown(summary)
-    time.sleep(0.5)
 
-    if media_id:
-        send_file(media_id)
-    else:
-        log("WARNING: HTML upload failed")
-
-    log("Done!")
+    log(f"Done! URL: {html_url}")
 
 
 if __name__ == "__main__":

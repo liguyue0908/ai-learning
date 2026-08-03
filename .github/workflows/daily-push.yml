@@ -2,14 +2,23 @@ name: AI 学习每日推送
 
 on:
   schedule:
-    # 北京时间 8:00 = UTC 0:00，周一到周五
     - cron: '0 0 * * 1-5'
-  workflow_dispatch:  # 允许手动触发测试
+  workflow_dispatch:
+
+# 需要写入权限来部署 Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   push:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -20,7 +29,8 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Push daily content
+      - name: Generate and push
         env:
           WEIXIN_WEBHOOK: ${{ secrets.WEIXIN_WEBHOOK }}
+          PAGES_URL: https://liguyue0908.github.io/ai-learning
         run: python3 generate.py

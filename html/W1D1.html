@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第一周 · 周一</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第一周 · 周一</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 1 天 · Phase 1 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot "></div><div class="dot "></div><div class="dot "></div><div class="dot "></div></div>
+<h2>第 1 课：AI 究竟是什么？(1/3)</h2>
+
+<blockquote>从"完全小白"到建立正确的 AI 心智模型</blockquote>
+
+<hr>
+
+<h3>🧠 一、先忘掉你听过的 AI 神话</h3>
+
+<p>"AI 要取代人类了"、"AI 什么都知道"、"AI 有自我意识"——这些你可能听过，<strong>它们全是错的</strong>，或者说严重误导初学者。</p>
+
+<p>让我们从最底层理解 AI 的本质。</p>
+
+<strong>大语言模型（LLM）= 一个超级"接话"机器。</strong>
+
+<p>想象你读过全世界所有书——维基百科、GitHub 代码、学术论文、Reddit 帖子、客服对话、法律合同——超过 10 万亿个字。读到这个量级后，你发展出一种神奇能力：<strong>给定一段文字开头，你能以惊人准确率"接出"接下来最可能的内容。</strong></p>
+
+<p>这就是 Claude 的工作方式。当你输入"客户投诉率上升，请分析原因"，Claude 不是在"思考"你的业务，而是在基于它读过的关于客户投诉、服务运营的文本，<strong>预测最合理的回复内容</strong>。</p>
+
+<strong>这个区别至关重要：</strong>
+<p>- AI 不是"知道答案" → 而是"预测最合理的回答"</p>
+<p>- AI 不是"理解你的业务" → 而是"匹配最相似的模式"</p>
+<p>- AI 不是"给出真理" → 而是"基于训练数据给出最可能正确的观点"</p>
+
+<hr>
+
+<h3>🎯 二、三个核心行为，解释 AI 所有表现</h3>
+
+<strong>行为 1：有时候极其聪明。</strong> 当问题领域有大量高质量训练数据时（编程、写作、数据分析），AI 表现惊艳——它的模式库里有无数优质"参考答案"。
+
+<strong>行为 2：有时候很蠢。</strong> 当问题非常小众、需要实时信息、或训练数据中少见时，AI 给出似是而非的回答。不是它笨，是它"没见过"。
+
+<strong>行为 3：会"幻觉"（Hallucination）。</strong> 不确定答案但必须"接话"时，AI 会编造——而且编得极其自信。可能给你不存在的论文引用、错误的函数名、或看似合理实则不对的分析结论。
+
+<blockquote>🔑 <strong>核心原则：AI 的所有输出都是"最可能的回答"，不一定是"正确的回答"。你的判断力是最后一道防线。</strong></blockquote>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 1 课：AI 究竟是什么？(2/3)</h2>
+
+<h3>🔍 三、AI 的能力边界：一张真实的地图</h3>
+
+<p>很多初学者在两个极端间摇摆：先觉得 AI 什么都能做（失望），又觉得 AI 什么都不行（放弃）。真相在中间。</p>
+
+<strong>✅ AI 真正擅长的事：</strong>
+
+<table><tr><th>能力</th><th>为什么擅长</th><th>你的工作场景举例</th></tr><tr><td>总结提炼</td><td>模式识别是 AI 的核心能力</td><td>把 50 页工单数据总结成 10 条核心发现</td></tr><tr><td>结构化生成</td><td>训练数据中有大量模板</td><td>生成 SOP 流程文档、周报、分析报告框架</td></tr><tr><td>多角度分析</td><td>能同时"套用"不同分析框架</td><td>从客户/渠道/内部三个视角分析同一问题</td></tr><tr><td>创意激发</td><td>能组合你没想到的概念对</td><td>为服务创新提供 10 个跨行业参考案例</td></tr><tr><td>语言转换</td><td>本质就是语言模型</td><td>把技术术语翻译成一线员工能懂的操作指南</td></tr></table>
+
+<strong>❌ AI 不擅长（或做不到）的事：</strong>
+
+<table><tr><th>局限</th><th>原因</th><th>你需要怎么做</th></tr><tr><td>实时信息</td><td>训练数据有截止日期</td><td>涉及最新政策/竞品动态，由你提供原始材料</td></tr><tr><td>价值判断</td><td>没有真实体验和价值观</td><td>战略决策、人员评估，AI 辅助分析，你来判断</td></tr><tr><td>精确计算</td><td>它是语言模型不是计算器</td><td>财务数据让 AI 列公式，你自己验算结果</td></tr><tr><td>原创创新</td><td>本质是重组已有知识</td><td>突破性创新需要你的行业直觉和一线经验</td></tr></table>
+
+<hr>
+
+<h3>🧩 四、最重要的心智模型：AI 是你的"超级实习生"</h3>
+
+<p>这个类比会帮助你在接下来一个月里做出正确判断：</p>
+
+<blockquote><strong>把 Claude 想象成一个智商 140、读过世界上所有书、打字速度无限快、永远不会累——但没有任何实际工作经验、不了解你的公司、不知道你的团队政治、也不能替你做决策的名校毕业生。</strong></blockquote>
+
+<p>这意味着：</p>
+<p>- ✅ 让它做初稿、做分析、做研究——它会做得又快又好</p>
+<p>- ✅ 给它清晰的指令和足够的背景——它的产出质量会飞跃提升</p>
+<p>- ❌ 不要让它做最终决策——那是你的工作</p>
+<p>- ❌ 不要期望它一次就完全理解你的意思——迭代对话才是常态</p>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 1 课：AI 究竟是什么？(3/3)</h2>
+
+<h3>🏢 五、连接到你的工作：五个场景，AI 可以今天就开始帮忙</h3>
+
+<strong>场景 1：客户服务运营</strong>
+<blockquote>"读取本月服务工单数据，按投诉类型分类，对比上月趋势，找出变化最大的 3 个类型，给出初步原因假设和改善建议。"</blockquote>
+
+<strong>场景 2：渠道建设运营</strong>
+<blockquote>"你是渠道策略专家。基于我提供的各渠道转化率、客单价、服务成本数据，按'能力-意愿'矩阵对 10 个渠道分层，每层给出差异化赋能策略。"</blockquote>
+
+<strong>场景 3：项目管理</strong>
+<blockquote>"我是 XX 项目的 PM。请帮我设计这个项目的 SOP 流程框架，包含：启动→执行→监控→收尾四个阶段，每个阶段 3-5 个关键节点，用流程图描述。"</blockquote>
+
+<strong>场景 4：售后运营（ITR）</strong>
+<blockquote>"分析我们的 ITR 流程，从客户视角梳理痛点：报修→响应→处理→反馈→关闭。每个环节找出 1 个最常见的断点，给出改进措施。"</blockquote>
+
+<strong>场景 5：组织建设</strong>
+<blockquote>"基于我提供的团队成员能力评估数据，做一次人才九宫格分析，识别高潜、骨干、需关注人员，并给出梯队建设建议。"</blockquote>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<p>打开 Claude Code，完成这个"破冰"对话：</p>
+
+<strong>STEP 1：建立背景</strong>
+<p>``<code></p>
+<p>你好 Claude，我是 [真实职位]，在我的工作中主要负责三件事：</p>
+<p>1. [你最核心的工作方向]</p>
+<p>2. [第二个方向]</p>
+<p>3. [第三个方向]</p>
+<p>请根据这些信息，告诉我你能在哪些具体方面帮到我？</p>
+</code>`<code>
+
+<strong>STEP 2：追问一个实际问题</strong>
+</code>`<code>
+<p>针对你说的 [选一个你最感兴趣的方向]，</p>
+<p>我手头正好有一个任务：[描述一个你本周真实要做的事]。</p>
+<p>请你给我一个具体的执行思路，不是泛泛而谈。</p>
+</code>``
+
+<strong>STEP 3：评估输出</strong>
+<p>对照今天的课程，判断 AI 给你的回答：</p>
+<p>- 哪些部分是"模式匹配"？（看起来很对但未必贴合你的实际情况）</p>
+<p>- 哪些部分是真正的洞察？</p>
+<p>- 如果让你给这个回答打分（1-10），你会打几分？为什么？</p>
+
+<blockquote>💡 <strong>今日核心收获：你建立了第一个正确的 AI 心智模型——AI 是强大的模式匹配器，不是你业务的决策者。带着这个认知，你已经开始超过 80% 的 AI 初学者。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：Claude Code 不只是聊天——文件操作、命令执行、多工具协作的完整能力地图</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第一周 · 周一</p>
+</div>
+</body>
+</html>
