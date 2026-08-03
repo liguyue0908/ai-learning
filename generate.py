@@ -230,8 +230,10 @@ def markdown_to_html(md_content, date_desc, wd):
     html_body = '\n'.join(final_lines)
     html_body = re.sub(r'<p></p>', '<br>', html_body)
 
-    day_total = int(wd[1:])
-    day_num = (day_total - 1) % 5 + 1
+    m = re.match(r'W(\d+)D(\d+)', wd)
+    w_num, d_num = int(m.group(1)), int(m.group(2))
+    day_total = (w_num - 1) * 5 + d_num
+    day_num = d_num
     progress_dots = ''
     for i in range(1, 6):
         cls = 'done' if i <= day_num else ''
