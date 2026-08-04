@@ -269,7 +269,7 @@ def build_summary(parts, date_desc, html_url):
 
 
 def commit_and_push(wd):
-    """将生成的 HTML 提交并推送到仓库"""
+    """将生成的 HTML 提交并推送到仓库。返回 True 表示有新的提交。"""
     try:
         subprocess.run(['git', 'config', 'user.name', 'AI Learning Bot'], check=True)
         subprocess.run(['git', 'config', 'user.email', 'bot@ai-learning.dev'], check=True)
@@ -280,9 +280,10 @@ def commit_and_push(wd):
             subprocess.run(['git', 'commit', '-m', f'Add {wd} [{date.today().isoformat()}]'], check=True)
             subprocess.run(['git', 'push'], check=True)
             log(f"Committed and pushed {wd}")
+            return True
         else:
-            log("No changes to commit")
-        return True
+            log("No changes to commit (already pushed earlier)")
+            return False
     except Exception as e:
         log(f"Git error: {e}")
         return False
@@ -370,14 +371,16 @@ def main():
         f.write(generate_index_html())
 
     # 提交到仓库 → GitHub Pages 自动发布
-    commit_and_push(wd)
+    committed = commit_and_push(wd)
 
-    # 发送企微摘要（含链接）
-    html_url = f"{PAGES_URL}/html/{wd}.html"
-    summary = build_summary(parts, date_desc, html_url)
-    send_markdown(summary)
-
-    log(f"Done! URL: {html_url}")
+    # 只有首次推送才发企微消息（防止 8:00 和 9:00 双保险重复推送）
+    if committed:
+        html_url = f"{PAGES_URL}/html/{wd}.html"
+        summary = build_summary(parts, date_desc, html_url)
+        send_markdown(summary)
+        log(f"Done! URL: {html_url}")
+    else:
+        log("Skipped markdown (already sent earlier today)")
 
 
 if __name__ == "__main__":
