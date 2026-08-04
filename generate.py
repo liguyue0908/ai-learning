@@ -14,7 +14,7 @@ import time
 from datetime import date, datetime, timedelta
 
 # === 配置 ===
-WEBHOOK_URL = os.environ.get("WEIXIN_WEBHOOK", "")
+WEBHOOK_URL = os.environ.get("WEIXIN_WEBHOOK", "") or "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=d6ef3e1d-74d2-4a0a-89e8-a0aa52970813"
 PAGES_URL = os.environ.get("PAGES_URL", "https://liguyue0908.github.io/ai-learning")
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(BASE_DIR, "content")
@@ -370,17 +370,14 @@ def main():
     with open(index_path, "w", encoding="utf-8") as f:
         f.write(generate_index_html())
 
-    # 提交到仓库 → GitHub Pages 自动发布
-    committed = commit_and_push(wd)
+    # 提交到仓库（best-effort，网络不通时跳过）
+    commit_and_push(wd)
 
-    # 只有首次推送才发企微消息（防止 8:00 和 9:00 双保险重复推送）
-    if committed:
-        html_url = f"{PAGES_URL}/html/{wd}.html"
-        summary = build_summary(parts, date_desc, html_url)
-        send_markdown(summary)
-        log(f"Done! URL: {html_url}")
-    else:
-        log("Skipped markdown (already sent earlier today)")
+    # 发送企微摘要（含链接）
+    html_url = f"{PAGES_URL}/html/{wd}.html"
+    summary = build_summary(parts, date_desc, html_url)
+    send_markdown(summary)
+    log(f"Done! URL: {html_url}")
 
 
 if __name__ == "__main__":
