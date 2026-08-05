@@ -1,9 +1,7 @@
-name: AI 学习每日推送（备胎）
+name: AI 学习每日推送（手动备用）
 
 on:
-  schedule:
-    - cron: '0 1 * * 1-5'    # 北京时间 9:00（备胎）
-  workflow_dispatch:
+  workflow_dispatch:  # 仅手动触发，不定时
 
 permissions:
   contents: write
