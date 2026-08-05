@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第二周 · 周四</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第二周 · 周四</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 9 天 · Phase 2 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot "></div></div>
+<h2>第 9 课：用 AI 分析数据——从数字到决策 (1/3)</h2>
+
+<blockquote>Prompt 工程 × 数据思维 = 让 AI 帮你从数据中挖出别人看不到的洞察</blockquote>
+
+<hr>
+
+<h3>📊 一、AI 分析数据的正确姿势</h3>
+
+<p>很多人让 AI 分析数据时犯一个根本错误：<strong>把数据丢给 AI 就完事了。</strong> 这和把 Excel 扔给实习生说"帮我看看"一样——结果取决于运气。</p>
+
+<strong>数据 + 好的 Prompt = 洞察</strong>
+<strong>数据 + 差的 Prompt = 一堆你本就知道的描述</strong>
+
+<strong>数据 Prompt 三段式：</strong>
+
+<p>``<code></p>
+<p>1. 定范围：告诉 AI 关注哪些数据、哪些维度</p>
+<p>2. 定方法：告诉 AI 用什么方式分析（对比/趋势/异常/分类）</p>
+<p>3. 定期望：告诉 AI 输出什么形式的结论</p>
+</code>`<code>
+
+<strong>案例对比：</strong>
+
+<p>❌ "帮我分析这份渠道数据"</p>
+<p>→ AI: "转化率有高有低，客单价差异较大..."（废话型输出）</p>
+
+<p>✅ "读取 @渠道Q3.csv，分析：</p>
+<p>1) 对比各渠道的转化率和客单价，找出表现最好和最差的 3 个渠道</p>
+<p>2) 分析转化率与客单价之间有没有相关性</p>
+<p>3) 找出数据中的异常值（偏离均值 2 个标准差以上的）</p>
+<p>4) 基于以上，给出 3 条具体的渠道优化建议</p>
+<p>输出：先给摘要（3 句），再给分析详情，最后给建议"</p>
+
+<hr>
+
+<h3>🔍 二、四种数据分析的"Prompt 模板"</h3>
+
+<strong>模板 1：对比分析</strong>
+<blockquote>"对比 [A] 和 [B] 在 [指标1/2/3] 上的差异。
+<p>差异超过 [X%] 的标注为'显著'，分析显著差异的原因假设。"</blockquote></p>
+
+<strong>模板 2：趋势发现</strong>
+<blockquote>"分析 [指标] 在过去 [N] 个月的趋势。
+<p>1)描述整体趋势（上升/下降/平稳）</p>
+<p>2)找出拐点（趋势明显变化的时间点）</p>
+<p>3)对拐点给出可能的解释"</blockquote></p>
+
+<strong>模板 3：异常检测</strong>
+<blockquote>"扫描 [数据集]，找出偏离均值超过 [X] 个标准差的异常值。
+<p>对每个异常值，判断：a)数据录入错误？b)真实业务异常？c)需要进一步调查？"</blockquote></p>
+
+<strong>模板 4：相关性探索</strong>
+<blockquote>"分析 [指标A] 和 [指标B] 之间是否有相关性。
+<p>如果有，是正相关还是负相关？强度如何？是否存在第三变量影响？"</blockquote></p>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 9 课：用 AI 分析数据——从数字到决策 (2/3)</h2>
+
+<h3>🎯 三、数据分析 × 你的工作场景</h3>
+
+<strong>场景 1：客户服务运营</strong>
+</code>`<code>
+<p>读：@服务工单.xlsx</p>
+<p>Prompt：「分析工单处理时长分布：</p>
+<p>1) 均值/中位数/P95 是多少？P95 与均值的差距说明什么？</p>
+<p>2) 按工单类型拆分处理时长，哪个类型最长？</p>
+<p>3) 处理时长和客户满意度之间有没有相关性？</p>
+<p>4) 找出处理时长超过 48h 的工单的共性特征」</p>
+</code>`<code>
+
+<strong>场景 2：渠道能力评估</strong>
+</code>`<code>
+<p>读：@渠道数据.csv</p>
+<p>Prompt：「基于 4 个维度评估 10 个渠道的健康度：</p>
+<p>转化率、客单价、激活率、投诉率。</p>
+<p>1) 各维度标准化打分（百分制）</p>
+<p>2) 综合排名，标注各渠道的最大优势和最大短板</p>
+<p>3) 按'综合分×稳定性'两个维度画四象限分类」</p>
+</code>`<code>
+
+<strong>场景 3：售后 ITR 分析</strong>
+</code>`<code>
+<p>读：@ITR数据.xlsx</p>
+<p>Prompt：「分析从'报修→响应→处理→反馈→关闭'全链路：</p>
+<p>1) 各环节平均耗时（标注最慢的环节）</p>
+<p>2) 各环节之间的'等待时间'（上一个完成到下一个开始）</p>
+<p>3) 闭环率趋势（月度），找出闭环率下降的时间点</p>
+<p>4) 按区域拆分，找出区域性差异」</p>
+</code>`<code>
+
+<hr>
+
+<h3>⚠️ 四、数据分析中的 AI 陷阱</h3>
+
+<table><tr><th>陷阱</th><th>表现</th><th>对策</th></tr><tr><td><strong>数据幻觉</strong></td><td>AI 编造数据、算错百分比</td><td>关键数字必须让 AI 展示计算过程</td></tr><tr><td><strong>相关性≠因果</strong></td><td>AI 发现两个指标一起变就说有因果关系</td><td>追问"有没有第三个因素同时影响它们？"</td></tr><tr><td><strong>忽略数据质量</strong></td><td>AI 不检查缺失值、异常值就分析</td><td>Prompt 开头加"先检查数据质量：缺失值/异常值/一致性"</td></tr><tr><td><strong>过度解读</strong></td><td>对随机波动给出煞有介事的解释</td><td>追问"这个变化的统计显著性如何？可能只是随机波动吗？"</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 9 课：用 AI 分析数据——从数字到决策 (3/3)</h2>
+
+<h3>🔬 五、从分析到决策：最后一公里</h3>
+
+<p>数据分析的终点不是"发现了什么"，而是"基于发现，我们该做什么"。很多 AI 分析止步于描述，你需要一个额外的 Prompt 来"翻译"成决策：</p>
+
+<strong>"分析→决策"翻译 Prompt：</strong>
+<blockquote>"基于以上分析结果，请回答：
+<p>1) 如果只能做一个改变，应该是什么？为什么？</p>
+<p>2) 这个改变预期带来多大的量化的改善？</p>
+<p>3) 实施这个改变有什么风险和前置条件？</p>
+<p>4) 建议用什么指标跟踪改善效果？"</blockquote></p>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>找一个你手头真实的数据文件，完成以下练习：</strong>
+
+<strong>STEP 1：数据探索（3 分钟）</strong>
+</code>`<code>
+<p>读取 @[你的数据文件]。</p>
+<p>先检查数据质量：有多少条记录？哪些列有缺失？有没有明显的异常值？</p>
+</code>``
+
+<strong>STEP 2：深度分析（4 分钟）</strong>
+<p>套用今天的模板（对比/趋势/异常/相关性），分析 2 个你最关心的业务问题。</p>
+
+<strong>STEP 3：决策翻译（3 分钟）</strong>
+<p>用"分析→决策"翻译 Prompt，把分析结论转化成行动计划。</p>
+
+<blockquote>💡 <strong>今日核心收获：数据 + 好 Prompt = 洞察，数据 + 差 Prompt = 废话。每次做数据分析前，花 1 分钟想清楚：我要对比什么？发现什么趋势？找出什么异常？验证什么关系？</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：W2 实战日——用两周所学，完成一次客户服务运营全景分析</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第二周 · 周四</p>
+</div>
+</body>
+</html>

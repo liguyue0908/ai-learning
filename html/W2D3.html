@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第二周 · 周三</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第二周 · 周三</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 8 天 · Phase 2 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot "></div><div class="dot "></div></div>
+<h2>第 8 课：思维链——让 AI"展示解题过程" (1/3)</h2>
+
+<blockquote>这是 Prompt 工程中最强大的技术之一——让复杂问题的准确率提升 50% 以上</blockquote>
+
+<hr>
+
+<h3>🧠 一、什么是思维链（Chain of Thought）？</h3>
+
+<strong>一句话定义：</strong> 让 AI 在给出最终答案之前，先把推理过程一步一步写出来。
+
+<strong>为什么这很重要？</strong> 想象一个数学老师让你解题。直接写答案 vs 先写解题步骤再给答案——哪个准确率高？AI 同理。
+
+<strong>没有思维链：</strong>
+<blockquote>"售后投诉处理时长增加，根本原因是什么？"</blockquote>
+<p>→ AI 跳步给出一个可能对也可能错的结论</p>
+
+<strong>有思维链：</strong>
+<blockquote>"请逐步分析售后投诉处理时长增加的原因。
+<p>第 1 步：列出所有可能导致处理时长增加的因素</p>
+<p>第 2 步：逐一判断每个因素在你描述的场景中是否适用</p>
+<p>第 3 步：排除不适用或影响小的因素</p>
+<p>第 4 步：对剩下的因素按影响程度排序</p>
+<p>第 5 步：给出最终结论——最可能的根本原因是什么"</blockquote></p>
+
+<strong>效果差异：</strong> 思维链让 AI 不能"跳步"，必须经过完整的推理链条。这大幅减少了幻觉和逻辑跳跃。
+
+<hr>
+
+<h3>📊 二、为什么思维链有效？</h3>
+
+<strong>原因 1：AI 的"快思考"和"慢思考"</strong>
+<p>AI 默认是"快思考"模式——看到问题、直接给答案。思维链强制它进入"慢思考"——逐步推导、检查中间结果。这和你处理复杂工作时需要的"深思熟虑"是一样的。</p>
+
+<strong>原因 2：中间步骤充当"校验点"</strong>
+<p>每一步输出都是对前一步的验证。如果第 2 步就出错了，第 3 步会暴露问题，而不是等到最后才发现整个结论是错的。</p>
+
+<strong>原因 3：你可以"中途干预"</strong>
+<p>如果 AI 在第 2 步的分析方向偏了，你可以立刻纠正，而不是等它跑完整个推理。</p>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 8 课：思维链——让 AI"展示解题过程" (2/3)</h2>
+
+<h3>🔧 三、思维链的四种用法</h3>
+
+<strong>用法 1：分步指令法</strong>
+<p>直接告诉 AI 分几步、每步做什么：</p>
+<blockquote>"请分 4 步分析我们的 ITR 流程问题：
+<p>1)列出流程的 5 个节点 2)每个节点标注当前痛点</p>
+<p>3)判断痛点根因（人/流程/工具）4)给出优先级排序"</blockquote></p>
+
+<strong>用法 2：自我提问法</strong>
+<p>让 AI 自己先提问，再回答：</p>
+<blockquote>"在分析渠道转化率下降原因之前，先列出你需要搞清楚的 5 个关键问题。然后逐一回答。"</blockquote>
+
+<strong>用法 3：反向验证法</strong>
+<p>让 AI 推完后自己"找茬"：</p>
+<blockquote>"给出你的分析结论后，请扮演一个持相反观点的人，对你的结论提出 3 个最有力的质疑。然后逐一回应这些质疑。"</blockquote>
+
+<strong>用法 4：多路径对比法</strong>
+<p>让 AI 从不同路径推到同一个问题：</p>
+<blockquote>"请分别从数据角度、流程角度、人员角度分析售后闭环率低的原因。最后综合三个视角，找出交叉验证的结论。"</blockquote>
+
+<hr>
+
+<h3>⚠️ 四、什么时候需要思维链？</h3>
+
+<table><tr><th>场景</th><th>需要思维链吗？</th><th>原因</th></tr><tr><td>简单事实查询</td><td>❌ 不需要</td><td>AI 直接回答即可</td></tr><tr><td>多因素复杂分析</td><td>✅ 必须用</td><td>防止结论跳跃</td></tr><tr><td>根因分析</td><td>✅ 必须用</td><td>需要逐层深挖</td></tr><tr><td>方案设计</td><td>✅ 建议用</td><td>确保方案逻辑完整</td></tr><tr><td>数据解读</td><td>✅ 建议用</td><td>防止误读数据</td></tr><tr><td>写周报/总结</td><td>❌ 不需要</td><td>任务本身不需要深层推理</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 8 课：思维链——让 AI"展示解题过程" (3/3)</h2>
+
+<h3>🎯 五、你的工作场景 × 思维链模板</h3>
+
+<strong>售后根因分析：</strong>
+<blockquote>"请逐步分析客户投诉率上升的原因，严格按照以下步骤：
+<p>1)列出所有可能的因素（不少于 5 个）</p>
+<p>2)用排除法逐一判断，说明排除理由</p>
+<p>3)对剩余因素做影响力评分（1-10）</p>
+<p>4)给出 Top 3 根因 + 数据支撑"</blockquote></p>
+
+<strong>项目风险评估：</strong>
+<blockquote>"分 3 轮评估 XX 项目的风险：
+<p>第 1 轮：头脑风暴所有可能的风险点（不少于 10 个）</p>
+<p>第 2 轮：按概率×影响两个维度打分</p>
+<p>第 3 轮：聚焦 Top 5 风险，给出应对方案"</blockquote></p>
+
+<strong>渠道策略决策：</strong>
+<blockquote>"用多路径对比法分析：从 ROI 角度、战略价值角度、执行难度角度分别评估 3 个渠道投入方案。然后综合三个视角给出推荐。"</blockquote>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>STEP 1：对比实验（5 分钟）</strong>
+<p>选一个你工作中需要分析的问题，分别用两种方式问：</p>
+<p>- A：直接问结论</p>
+<p>- B：让 AI 分 4-5 步逐步推导</p>
+
+<strong>对比两个回答：</strong>
+<p>- 哪个更可信？</p>
+<p>- B 版本中有没有哪一步的逻辑你不认同？</p>
+<p>- 有没有 B 版本推出来但 A 版本完全没提到的新发现？</p>
+
+<strong>STEP 2：反向验证（5 分钟）</strong>
+<p>``<code></p>
+<p>把你 STEP 1 中 AI 的最终结论拿出来，追问：</p>
+<p>"请扮演反对者，对这个结论提出最有力的 3 个质疑，</p>
+<p>然后逐一回应。"</p>
+</code>``
+
+<blockquote>💡 <strong>今日核心收获：复杂问题必须用思维链。分步推理 = 给 AI 的思考装上"安全带"，每一步都是校验，每一步都能干预。口诀：分析类问题不跳步，决策类问题走多路径。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：用 AI 分析数据——从原始数据到商业洞察的完整链路</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第二周 · 周三</p>
+</div>
+</body>
+</html>

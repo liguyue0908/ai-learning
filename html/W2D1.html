@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第二周 · 周一</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第二周 · 周一</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 6 天 · Phase 2 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot "></div><div class="dot "></div><div class="dot "></div><div class="dot "></div></div>
+<h2>第 6 课：Prompt 模式库（上）——角色与示例 (1/3)</h2>
+
+<blockquote>掌握 3 种核心 Prompt 模式，让 AI 输出质量跃升一个台阶</blockquote>
+
+<hr>
+
+<h3>🎭 一、模式 1：角色扮演（Role Playing）</h3>
+
+<p>RFC 法则中的 R，值得单独深挖。角色扮演不只是"告诉 AI 你是谁"，而是<strong>激活 AI 知识库中特定的语言模式和分析框架</strong>。</p>
+
+<p>同一个问题，三种角色，三种完全不同的输出：</p>
+
+<strong>问题：</strong> "我们的客户投诉处理时长在增加，怎么办？"
+
+<strong>角色 A：「你是麦肯锡运营顾问」</strong>
+<p>→ AI 输出：用 MECE 框架拆解根因，给出成本-收益分析矩阵</p>
+<p>适合：向上汇报、战略决策</p>
+
+<strong>角色 B：「你是一线客服主管，10 年经验」</strong>
+<p>→ AI 输出：列出具体的执行动作、话术模板、排班优化建议</p>
+<p>适合：团队执行、落地改进</p>
+
+<strong>角色 C：「你是一个不满的客户」</strong>
+<p>→ AI 输出：从客户视角还原体验断点，指出哪些环节最让人恼火</p>
+<p>适合：服务设计、体验优化</p>
+
+<strong>进阶技巧：多角色协同。</strong> 让 AI 分别用 3 个角色分析同一问题，你来对比综合。
+<blockquote>"请分别以 CEO、一线员工、客户的视角，分析我们服务流程的问题。每个视角 3 个要点。"</blockquote>
+
+<hr>
+
+<h3>📋 二、模式 2：示例引导（Few-Shot Prompting）</h3>
+
+<p>给 AI 看 1-3 个示例，告诉它"照这个格式和风格来"。这比任何文字描述都精准。</p>
+
+<strong>没有示例：</strong>
+<blockquote>"帮我写 3 条渠道赋能建议"</blockquote>
+<p>→ AI 可能写出各种风格的建议，不一定符合你的格式要求</p>
+
+<strong>有示例：</strong>
+<blockquote>"参考以下格式写 3 条渠道赋能建议：
+<p>【示例】渠道 A（低能力高意愿）→ 赋能方案：1)产品培训 2 次/月 2)联合拜访 4 次/月 3)月度复盘会。目标：3 个月内转化率提升 20%。</blockquote></p>
+<p>></p>
+<blockquote>请按同样格式，为渠道 B（高能力低意愿）和渠道 C（双低）写方案。"</blockquote>
+
+<strong>示例引导的威力：</strong> 你不需要描述"格式"——AI 直接从示例中学习。
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 6 课：Prompt 模式库（上）——角色与示例 (2/3)</h2>
+
+<h3>🔄 三、模式 3：对话式迭代（Iterative Refinement）</h3>
+
+<p>很多人以为 Prompt 是一次性的——写好了，发出去，结果不满意就放弃。错了。</p>
+
+<strong>Prompt 是对话的起点，不是终点。</strong> 高手的工作流：
+
+<p>``<code></p>
+<p>第 1 轮：给出初始 Prompt（宽泛一些）</p>
+<p>第 2 轮：针对不满意的地方精准调整</p>
+<p>第 3 轮：在调整后的基础上追加需求</p>
+<p>第 4 轮：让 AI 自检并优化</p>
+</code>`<code>
+
+<strong>实战示例：</strong>
+
+<strong>第 1 轮（初始）：</strong>
+<blockquote>"帮我设计一个渠道服务能力评估模型。"</blockquote>
+
+<p>AI 给出 5 维度模型。</p>
+
+<strong>第 2 轮（收敛）：</strong>
+<blockquote>"维度太多了，精简到 3 个最核心的维度。另外每个维度增加 2-3 个可量化的评估指标。"</blockquote>
+
+<p>AI 压缩到 3 维度 + 指标。</p>
+
+<strong>第 3 轮（追加）：</strong>
+<blockquote>"很好。现在基于这个模型，帮我设计一张评估打分表，100 分制，附评分标准。"</blockquote>
+
+<p>AI 生成完整打分表。</p>
+
+<strong>第 4 轮（自检）：</strong>
+<blockquote>"如果你是渠道经理，用这份打分表评估你手下最熟悉的一个渠道，看看有没有不合理的地方？"</blockquote>
+
+<p>AI 模拟测试，发现权重分配问题，自动修正。</p>
+
+<strong>3 轮迭代的效果，远超一次性写一个"完美 Prompt"。</strong>
+
+<hr>
+
+<h3>🎯 四、三个模式的排兵布阵</h3>
+
+<table><tr><th>场景</th><th>首选模式</th><th>辅助模式</th></tr><tr><td>需要多角度洞察</td><td>角色扮演（多角色协同）</td><td>对话迭代</td></tr><tr><td>需要统一格式输出</td><td>示例引导</td><td>对话迭代</td></tr><tr><td>方案从模糊到清晰</td><td>对话迭代</td><td>角色扮演</td></tr><tr><td>向上汇报材料</td><td>示例引导（给模板）</td><td>角色扮演</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 6 课：Prompt 模式库（上）——角色与示例 (3/3)</h2>
+
+<h3>🧪 五、常见翻车现场</h3>
+
+<strong>翻车 1：角色太模糊</strong>
+<p>❌ "你是专家" → 什么专家？什么领域？</p>
+<p>✅ "你是拥有 8 年经验的 SaaS 行业客户成功负责人"</p>
+
+<strong>翻车 2：示例和需求不一致</strong>
+<p>❌ 给了一个 B2C 的示例 → 让 AI 写 B2B 策略</p>
+<p>✅ 示例的选择要贴近你实际要解决的问题类型</p>
+
+<strong>翻车 3：迭代时丢失了之前的约束</strong>
+<p>❌ 第 1 轮设了字数限制，第 2-3 轮忘了提</p>
+<p>✅ 关键约束在新消息中重复或引用："延续前面的字数限制..."</p>
+
+<strong>翻车 4：一次迭代太多方向</strong>
+<p>❌ "改一下角色、换成表格、加 3 个维度、语气正式一些"</p>
+<p>✅ 每次迭代只改 1-2 个方向，更容易收敛到理想结果</p>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>STEP 1：角色扮演实验（4 分钟）</strong>
+<p>选一个你手头的工作问题，分别用 3 个不同角色提问：</p>
+</code>`<code>
+<p>角色 1：行业专家视角</p>
+<p>角色 2：一线执行者视角</p>
+<p>角色 3：客户/用户视角</p>
+</code>`<code>
+<p>对比 3 个输出，哪个角度给了你新的启发？</p>
+
+<strong>STEP 2：示例引导（3 分钟）</strong>
+<p>找一份你满意的历史报告/方案，把它作为示例喂给 AI：</p>
+</code>`<code>
+<p>"参考以下格式和风格：[粘贴你的示例]</p>
+<p>请按同样风格，为 [新场景] 写一份方案。"</p>
+</code>``
+
+<strong>STEP 3：迭代对话（3 分钟）</strong>
+<p>把 STEP 1 或 STEP 2 的结果不满意的地方，追着改 3 轮。</p>
+
+<blockquote>💡 <strong>今日核心收获：三个模式是乘法关系，不是加法。角色扮演 × 示例引导 × 对话迭代 = 指数级提升输出质量。今天开始，每次 Prompt 至少用其中两个。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：格式化输出 + 约束条件的进阶玩法——让 AI 输出"拿来就能用"</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第二周 · 周一</p>
+</div>
+</body>
+</html>

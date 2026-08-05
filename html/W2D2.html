@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第二周 · 周二</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第二周 · 周二</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 7 天 · Phase 2 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot "></div><div class="dot "></div><div class="dot "></div></div>
+<h2>第 7 课：Prompt 模式库（下）——格式与约束 (1/3)</h2>
+
+<blockquote>学会"格式化输出"和"精准约束"——你的 AI 输出从"能看"变成"能用"</blockquote>
+
+<hr>
+
+<h3>📐 一、格式化输出：让 AI 的输出"拿来就用"</h3>
+
+<p>Prompt 高手和普通人的最大区别之一：<strong>高手让 AI 按照交付标准直接输出，普通人拿到 AI 输出后还要自己二次加工。</strong></p>
+
+<p>格式化输出的 6 种武器：</p>
+
+<strong>1. 表格输出</strong>
+<blockquote>"用 Markdown 表格对比，列为渠道名 | 转化率 | 客单价 | 服务评分 | 综合评级"</blockquote>
+<p>→ 适合：多对象对比、数据概览、决策矩阵</p>
+
+<strong>2. 结构化分段</strong>
+<blockquote>"按以下结构输出：一、背景概述（2 句）二、核心发现（3-5 条）三、风险提示（按严重程度排序）四、下一步建议"</blockquote>
+<p>→ 适合：报告、方案、汇报材料</p>
+
+<strong>3. 要点列表</strong>
+<blockquote>"用 bullet points 列出，每条不超过 30 字，突出一个核心信息"</blockquote>
+<p>→ 适合：快速同步、Slack/企微消息、会议提纲</p>
+
+<strong>4. 模板填空</strong>
+<blockquote>"以下是报告模板，请填充 [ ] 中的内容：[本月服务工单总量为 XX，环比变化 XX%...]"</blockquote>
+<p>→ 适合：标准化报告、周报月报</p>
+
+<strong>5. SWOT/矩阵</strong>
+<blockquote>"用 SWOT 框架分析我们的售后服务能力"</blockquote>
+<p>→ 适合：战略分析、方案评估</p>
+
+<strong>6. 对话脚本</strong>
+<blockquote>"写一段客服回访话术，包含开场白、核心问题、异议应对、结尾"</blockquote>
+<p>→ 适合：培训材料、话术设计</p>
+
+<hr>
+
+<h3>⛓️ 二、约束条件：给 AI 装上"轨道"</h3>
+
+<p>约束不是限制 AI，而是<strong>把你的隐性需求显性化</strong>。</p>
+
+<strong>五类约束速查表：</strong>
+
+<table><tr><th>约束类型</th><th>示例</th><th>为什么重要</th></tr><tr><td>字数/篇幅</td><td>"每条建议不超过 50 字"</td><td>防止 AI 过度发挥，控制信息密度</td></tr><tr><td>数据范围</td><td>"只分析 Q3 数据，不含 Q4 预测"</td><td>防止 AI 脑补你没有的数据</td></tr><tr><td>输出语言</td><td>"用一线客服能听懂的语言"</td><td>确保输出对受众可理解</td></tr><tr><td>排除项</td><td>"不要提需要增加编制的建议"</td><td>排除不可行的方向</td></tr><tr><td>格式锁定</td><td>"严格按 Markdown 格式，包含 ## 标题"</td><td>确保输出可直接粘贴使用</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 7 课：Prompt 模式库（下）——格式与约束 (2/3)</h2>
+
+<h3>🧩 三、组合技：格式 × 约束 × 角色</h3>
+
+<p>这才是真正的威力所在。三个维度组合 = Prompt 的"黄金三角"：</p>
+
+<strong>案例：为渠道赋能方案写 Prompt</strong>
+
+<p>❌ <strong>基础版：</strong></p>
+<blockquote>"帮我写个渠道赋能方案。"</blockquote>
+
+<p>✅ <strong>黄金三角版：</strong></p>
+<blockquote>"你是渠道运营总监（<strong>角色</strong>）。
+<p>请为我们的 3 类渠道（高能力低意愿 / 低能力高意愿 / 双低）分别设计赋能方案（<strong>约束-范围</strong>）。</p>
+<p>输出格式（<strong>格式</strong>）：</p>
+<table><tr><th>渠道类型</th><th>核心问题</th><th>赋能策略</th><th>执行动作(3项)</th><th>预期效果</th><th>投入成本</th></tr></table>
+<p>每类渠道的方案控制在表格的一行内，不要展开成段落（<strong>约束-篇幅</strong>）。</p>
+<p>不要提需要额外招聘的建议（<strong>约束-排除</strong>）。"</blockquote></p>
+
+<strong>对比效果：</strong>
+<p>- 基础版 → AI 给你 3 段泛泛的文字，你需要花 20 分钟整理</p>
+<p>- 黄金三角版 → AI 给你一张可直接贴进 PPT 的决策表</p>
+
+<hr>
+
+<h3>🔑 四、格式化的进阶技巧</h3>
+
+<strong>技巧 1：指定"引用风格"</strong>
+<blockquote>"分析结论请标注数据来源，用 (数据出处：XX) 的格式"</blockquote>
+
+<strong>技巧 2：分层次输出</strong>
+<blockquote>"先给 Executive Summary（3 句话），再给详细分析。用 --- 分隔。"</blockquote>
+
+<strong>技巧 3：要求"可操作度"评级</strong>
+<blockquote>"每条建议后面标注可操作度：⭐容易 ⭐⭐中等 ⭐⭐⭐困难"</blockquote>
+
+<strong>技巧 4：要求 AI 自评分</strong>
+<blockquote>"输出完成后，给你自己的回答打分（1-10），说明扣分原因"</blockquote>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 7 课：Prompt 模式库（下）——格式与约束 (3/3)</h2>
+
+<h3>🎯 五、你的工作场景 × 格式化输出速查</h3>
+
+<table><tr><th>工作场景</th><th>推荐格式</th><th>关键约束</th></tr><tr><td>服务工单月报</td><td>结构化分段（摘要→发现→建议）</td><td>数据精确到小数点后 1 位</td></tr><tr><td>渠道分层方案</td><td>表格（渠道×能力×意愿×策略）</td><td>每层给差异化策略</td></tr><tr><td>项目 SOP 文档</td><td>分阶段流程图描述</td><td>每阶段 3-5 节点，含负责人</td></tr><tr><td>ITR 流程诊断</td><td>问题-根因-对策表</td><td>按客户视角，非内部视角</td></tr><tr><td>人才盘点报告</td><td>九宫格 + 个人分析模板</td><td>重点关注两端（高潜/需改善）</td></tr></table>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>STEP 1：格式化改造（4 分钟）</strong>
+<p>把上周用过的任意一个 Prompt 找出来，加上格式化输出要求：</p>
+<p>- 原来："帮我分析 XX"</p>
+<p>- 改造为："用表格+要点的方式输出，表格做对比，要点做总结"</p>
+
+<p>对比两个输出的"可交付性"差异。</p>
+
+<strong>STEP 2：约束实验（3 分钟）</strong>
+<p>同一个问题，分别用 A/B 测试：</p>
+<p>- A：不加约束 → 看 AI 自由发挥</p>
+<p>- B：加 3 个精准约束 → 看 AI 精准输出</p>
+<p>对比两个输出的差异。</p>
+
+<strong>STEP 3：黄金三角练习（3 分钟）</strong>
+<p>为明天要做的任何一个工作任务，写一个完整的"角色×格式×约束"Prompt，保存为模板。</p>
+
+<blockquote>💡 <strong>今日核心收获：格式决定"能不能用"，约束决定"用不用得上"。从今天开始，每个 Prompt 都至少指定一个格式和一个约束。两周后这会成为你的肌肉记忆。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：思维链——让 AI "展示解题过程"，大幅提升复杂问题准确率</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第二周 · 周二</p>
+</div>
+</body>
+</html>

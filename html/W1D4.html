@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第一周 · 周四</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第一周 · 周四</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 4 天 · Phase 1 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot "></div></div>
+<h2>第 4 课：AI 的"记忆"与对话管理 (1/3)</h2>
+
+<blockquote>理解上下文窗口——这是区分"会用 AI"和"精通 AI"的分水岭</blockquote>
+
+<hr>
+
+<h3>🪟 一、上下文窗口：AI 的"工作记忆"</h3>
+
+<p>Claude 有一个<strong>上下文窗口（Context Window）</strong>——你可以理解为它一次能"看见"的对话总量。</p>
+
+<p>想象你和一位记忆力超群但有个奇怪限制的同事一起工作：他能记住你们最近 2 小时说的每一个字，但超过 2 小时的内容就像被橡皮擦擦掉了——他完全不记得对话开头你们说了什么。</p>
+
+<p>这就是上下文窗口。<strong>早期内容会在窗口满了之后被"挤出"。</strong></p>
+
+<p>为什么这很重要？看一个真实场景：</p>
+
+<p>❌ <strong>错误做法：</strong></p>
+<blockquote>第 1 轮："我是售后运营，负责 ITR 流程，团队 30 人，覆盖 3 个区域..."
+<p>第 15 轮："对了，基于我们开头说的那个数据..."</p>
+<p>→ AI 可能已经"忘记"了你的团队规模和背景</blockquote></p>
+
+<p>✅ <strong>正确做法：</strong></p>
+<blockquote>第 1-5 轮：建立背景并深入分析
+<p>第 6 轮："总结一下我们目前确认的关键信息"</p>
+<p>第 15 轮："基于之前的分析（我们团队 30 人/3 区域/ITR 流程）..."</blockquote></p>
+
+<hr>
+
+<h3>🧵 二、对话的三个阶段</h3>
+
+<strong>阶段 1：背景建立期（前 20% 的对话）</strong>
+<p>一次性告诉 AI 所有关键背景：你是谁、什么场景、有什么数据、要解决什么问题。这个阶段的信息决定整个对话的质量。</p>
+
+<blockquote>"我是售后运营负责人。负责 ITR 流程搭建和售后数据分析，团队 30 人覆盖华北/华东/华南。今天要分析本月服务工单数据，找根因、出方案。"</blockquote>
+
+<strong>阶段 2：深度分析期（中间 60%）</strong>
+<p>基于已建立的背景，逐层深入。这是 AI 最"高产"的阶段。</p>
+<p>- 先让 AI 给全景分析</p>
+<p>- 再针对具体问题深挖</p>
+<p>- 最后交叉对比找关联</p>
+
+<strong>阶段 3：沉淀收尾期（最后 20%）</strong>
+<p>在 AI"忘记"之前，把关键结论整理成文档保存下来。<strong>不保存 = 白聊。</strong></p>
+<blockquote>"把我们今天讨论的结论整理成一份行动计划，保存为 markdown 文件。"</blockquote>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 4 课：AI 的"记忆"与对话管理 (2/3)</h2>
+
+<h3>💾 三、Memory 系统：跨越对话的"长期记忆"</h3>
+
+<p>Claude Code 有一个 Memory 系统，可以让 AI 记住你的信息<strong>跨对话保存</strong>。</p>
+
+<strong>可以记住什么：</strong>
+<p>- 你的角色和职责</p>
+<p>- 你的团队结构</p>
+<p>- 你的工作偏好和常用模板</p>
+<p>- 你的业务术语和缩写</p>
+
+<strong>如何写入 Memory：</strong>
+<blockquote>"请记住：我是 XX 公司售后运营负责人，负责 ITR 流程搭建和售后数据分析。团队 30 人，覆盖华北/华东/华南 3 个区域。我们内部把'问题到解决'流程简称为 ITR。"</blockquote>
+
+<strong>如何查看：</strong>
+<blockquote>"你记住了关于我的哪些信息？"</blockquote>
+
+<strong>如何管理：</strong>
+<blockquote>"更新我的 Memory：团队现在扩展到了 45 人，新增了西南区域。"</blockquote>
+
+<strong>常见误区：</strong>
+<p>❌ 以为 Memory 和对话上下文是一回事 → Memory 是跨对话的长期存储，上下文是一次对话的短期记忆</p>
+<p>❌ 写太多无关信息 → Memory 只记关键的工作背景和偏好，不要写"我喜欢喝咖啡"</p>
+<p>❌ 从来没更新过 → 团队变化、职责调整后要记得更新 Memory</p>
+
+<hr>
+
+<h3>⚠️ 四、长对话四大陷阱</h3>
+
+<table><tr><th>陷阱</th><th>症状</th><th>对策</th></tr><tr><td><strong>上下文稀释</strong></td><td>聊到后面 AI 输出越来越泛</td><td>每 5-6 轮暂停一次："总结一下目前讨论的要点"然后在新消息中引用</td></tr><tr><td><strong>话题混杂</strong></td><td>AI 把不同主题的分析混在一起</td><td>一个对话只聚焦一个主题。渠道分析？开新对话。组织诊断？开新对话。</td></tr><tr><td><strong>约束遗忘</strong></td><td>AI 忽略了早期设定的字数/格式/角色限制</td><td>重要的约束在新消息开头重复一遍</td></tr><tr><td><strong>记忆泄漏</strong></td><td>多轮后 AI 开始"脑补"你没说过的信息</td><td>定期让 AI 确认事实："基于我们目前讨论的内容，你理解的背景是什么？有任何不确定的地方吗？"</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 4 课：AI 的"记忆"与对话管理 (3/3)</h2>
+
+<h3>🎯 五、对话管理实战：你的工作场景</h3>
+
+<strong>场景：渠道分层分析</strong>
+<p>``<code></p>
+<p>[阶段1] 我是渠道运营，负责 10 个渠道的管理。今天要基于 Q3 数据做渠道分层，</p>
+<p>评估维度：转化率、客单价、服务成本、合作意愿。请记住这些信息。</p>
+
+<p>[阶段2] 读取 @渠道Q3数据.xlsx，按上述 4 个维度分析...</p>
+<p>→ "把转化率低于平均的渠道单独拿出来，分析共性"</p>
+<p>→ "高意愿低能力的渠道，有什么针对性的赋能建议？"</p>
+
+<p>[阶段3] 把我们刚才讨论的渠道分层结果和建议整理成方案文档，</p>
+<p>包含：1)分层矩阵 2)各层特征 3)差异化策略 4)下季度目标</p>
+<p>保存为 markdown 文件。</p>
+</code>`<code>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>STEP 1：写入 Memory（2 分钟）</strong>
+</code>`<code>
+<p>请帮我创建 Memory，记住以下信息：</p>
+<p>- 我的职位和核心职责（3 个方向）</p>
+<p>- 我的团队规模</p>
+<p>- 我常用的一个业务术语或缩写</p>
+</code>`<code>
+
+<strong>STEP 2：验证 Memory（2 分钟）</strong>
+</code>`<code>
+<p>新开一个对话，问 AI："你记得关于我的什么信息？"</p>
+</code>``
+<p>检查：AI 能不能在新对话中回忆起你刚才写的 Memory？</p>
+
+<strong>STEP 3：长对话练习（6 分钟）</strong>
+<p>选一个真实工作话题，刻意进行 10 轮以上对话。</p>
+<p>- 第 5 轮时暂停，让 AI 总结</p>
+<p>- 第 10 轮时检查：AI 还记得第 2 轮讨论的细节吗？</p>
+<p>- 最后让 AI 把讨论保存为文件</p>
+
+<blockquote>💡 <strong>今日核心收获：对话管理 = 背景建立（前 20%）+ 深度分析（中间 60%）+ 沉淀保存（后 20%）。Memory 让你跨对话记住关键信息。从现在开始，每个重要对话结束时都问自己：这个结论保存了吗？</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：AI 不只是"聊"——"读-析-写"三步工作流，让 AI 真正帮你做完 80% 的工作</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第一周 · 周四</p>
+</div>
+</body>
+</html>

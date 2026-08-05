@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第二周 · 周五</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第二周 · 周五</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 10 天 · Phase 2 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div></div>
+<h2>第 10 课：实战日——客户服务运营全景分析 (1/3)</h2>
+
+<blockquote>综合运用两周所学的全部技能，完成一个端到端的真实工作场景</blockquote>
+
+<hr>
+
+<h3>🎯 一、今日目标</h3>
+
+<p>今天不学新概念。你要把 W1-W2 学到的所有技能串起来，完成一次完整的"客户服务运营全景分析"。</p>
+
+<strong>你会用到的技能清单：</strong>
+
+<table><tr><th>技能</th><th>来源</th><th>今日怎么用</th></tr><tr><td>RFC 三段式</td><td>W1D3</td><td>每个 Prompt 都套用角色+格式+约束</td></tr><tr><td>上下文管理</td><td>W1D4</td><td>分阶段对话，中间总结，结尾保存</td></tr><tr><td>读析写工作流</td><td>W1D5</td><td>读取数据→分析→生成报告</td></tr><tr><td>角色扮演</td><td>W2D1</td><td>从客服/客户/管理者三个视角审视</td></tr><tr><td>格式化输出</td><td>W2D2</td><td>表格+要点+结构化报告</td></tr><tr><td>思维链</td><td>W2D3</td><td>根因分析用分步推理</td></tr><tr><td>数据分析</td><td>W2D4</td><td>对比/趋势/异常检测</td></tr></table>
+
+<hr>
+
+<h3>🗺️ 二、实战路线图</h3>
+
+<strong>场景设定：</strong> 你是客服运营负责人，需要做本月服务质量全景分析。
+
+<strong>完整流程（分 3 个阶段）：</strong>
+
+<strong>阶段 1：数据全景扫描（对话 1-3 轮）</strong>
+<p>- 读取数据 → 检查数据质量 → 描述整体画像</p>
+
+<strong>阶段 2：深度分析（对话 4-8 轮）</strong>
+<p>- 投诉分类 → 趋势对比 → 根因分析 → 区域差异</p>
+
+<strong>阶段 3：报告生成（对话 9-10 轮）</strong>
+<p>- 综合结论 → 生成报告 → 保存文件</p>
+
+<hr>
+
+<h3>📋 三、Prompt 模板包（直接复制使用）</h3>
+
+<strong>模板 1：数据全景扫描</strong>
+<p>``<code></p>
+<p>你是客服数据运营专家。读取 @[你的数据文件]。</p>
+<p>第1步：描述数据基本情况（记录数、字段、时间范围）</p>
+<p>第2步：检查数据质量（缺失率、异常值）</p>
+<p>第3步：给出数据全景画像（5 个关键数字）</p>
+</code>`<code>
+
+<strong>模板 2：多维度对比</strong>
+</code>`<code>
+<p>基于以上数据，用表格对比：</p>
+<table><tr><th>维度</th><th>本月</th><th>上月</th><th>环比变化</th><th>是否异常</th></tr></table>
+<p>分析维度：工单量、处理时长、满意度、一次性解决率</p>
+<p>异常标准：变化超过 20% 或连续 3 个月同一方向</p>
+</code>`<code>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 10 课：实战日——客户服务运营全景分析 (2/3)</h2>
+
+<h3>📋 三、Prompt 模板包（续）</h3>
+
+<strong>模板 3：根因分析（思维链）</strong>
+</code>`<code>
+<p>针对 [最严重的问题]，分 5 步做根因分析：</p>
+<p>第1步：列出所有可能的原因（不少于5个）</p>
+<p>第2步：用排除法逐一判断，说明排除理由</p>
+<p>第3步：对剩余原因做影响力评分（1-10）</p>
+<p>第4步：给出 Top 3 根因</p>
+<p>第5步：每个根因给出 1 条可直接执行的改善措施</p>
+</code>`<code>
+
+<strong>模板 4：三角色交叉验证</strong>
+</code>`<code>
+<p>请分别以三个角色审视以上分析结论：</p>
+<p>角色A - 客服主管：这个分析漏了什么执行层的问题？</p>
+<p>角色B - 客户：哪个问题最影响体验？</p>
+<p>角色C - 运营总监：哪个问题最影响成本和效率？</p>
+<p>综合三个角色的反馈，修正分析结论。</p>
+</code>`<code>
+
+<strong>模板 5：生成决策报告</strong>
+</code>`<code>
+<p>基于以上全部分析，生成一份决策报告，保存为 .md 文件。</p>
+<p>结构：</p>
+<p>一、核心摘要（3 句话，总监 30 秒能看懂）</p>
+<p>二、关键指标仪表盘（5 个核心指标的表格）</p>
+<p>三、问题分析（Top 3 问题，每个附数据和根因）</p>
+<p>四、改善建议（按优先级排序，每条含：动作、负责人、预期效果、跟踪指标）</p>
+<p>五、下月重点关注（3 个预警信号）</p>
+</code>`<code>
+
+<hr>
+
+<h3>⚡ 四、效率技巧：模板化你的 Prompt</h3>
+
+<p>今天用完这些 Prompt 模板后，<strong>把它们存下来</strong>。下次再做类似分析，直接复制模板，改几个关键词就行。</p>
+
+<strong>创建你的个人 Prompt 工具箱：</strong>
+<blockquote>"帮我创建一个 markdown 文件，保存我今天用到的所有 Prompt 模板，分类整理好。文件名为 '我的 Prompt 工具箱.md'"</blockquote>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 10 课：实战日——客户服务运营全景分析 (3/3)</h2>
+
+<h3>🏋️ 今日练习（到公司后 10-15 分钟）</h3>
+
+<strong>完成一次完整的服务运营全景分析。</strong>
+
+<p>如果有真实数据，用真实数据。如果没有，让 AI 生成模拟数据来练习：</p>
+
+<blockquote>"请生成一份模拟的客服工单数据集，包含 500 条记录，字段：工单ID、创建时间、关闭时间、类型（投诉/咨询/报修）、区域（华北/华东/华南）、处理人、满意度评分、是否一次性解决。保存为 CSV 文件。然后我们开始全景分析。"</blockquote>
+
+<hr>
+
+<strong>执行清单：</strong>
+
+</code>`<code>
+<p>□ 阶段1：用模板1 完成数据全景扫描</p>
+<p>□ 阶段2：用模板2 完成多维度对比</p>
+<p>□ 阶段2：用模板3 完成根因分析（思维链）</p>
+<p>□ 阶段2：用模板4 完成三角色交叉验证</p>
+<p>□ 阶段3：用模板5 生成最终决策报告</p>
+<p>□ 保存：创建"我的 Prompt 工具箱.md"</p>
+</code>``
+
+<hr>
+
+<h3>📝 第二周知识地图</h3>
+
+<table><tr><th>天数</th><th>核心技能</th><th>一句话总结</th></tr><tr><td>D6</td><td>角色扮演 + 示例引导</td><td>激活 AI 的专业知识区</td></tr><tr><td>D7</td><td>格式化输出 + 精准约束</td><td>让输出"拿来就能用"</td></tr><tr><td>D8</td><td>思维链</td><td>复杂问题分步推理，杜绝跳步</td></tr><tr><td>D9</td><td>数据驱动分析</td><td>从数字到洞察的完整链路</td></tr><tr><td>D10</td><td>实战：全景分析</td><td>两周技能全串联</td></tr></table>
+
+<hr>
+
+<h3>🎉 Phase 1 完成！</h3>
+
+<strong>你已经掌握了：</strong>
+<p>- ✅ AI 的正确心智模型</p>
+<p>- ✅ RFC 三段式 Prompt 框架</p>
+<p>- ✅ 6 种核心 Prompt 模式</p>
+<p>- ✅ 思维链分步推理</p>
+<p>- ✅ 读析写四步工作流</p>
+<p>- ✅ 从数据到决策的完整链路</p>
+
+<strong>下周预告：Phase 2 开启——文档生成、SOP 设计、数据可视化、对比评估，让你的 AI 产出直接对接到工作交付物。</strong>
+
+<blockquote>💡 <strong>周末复盘建议：打开 Claude Code，回顾 Memory 中保存的信息是否准确。翻翻这周生成的报告文件，感受一下"AI 帮你做完"的生产力飞跃。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 下周一预告：文档生成术——周报、月报、会议纪要一键生成</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第二周 · 周五</p>
+</div>
+</body>
+</html>

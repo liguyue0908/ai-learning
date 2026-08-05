@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第一周 · 周五</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第一周 · 周五</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 5 天 · Phase 1 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div></div>
+<h2>第 5 课：AI 的"手"——读析写工作流 (1/3)</h2>
+
+<blockquote>今天你会掌握 Claude Code 最高频的使用模式，80% 的工作都能套这个流程</blockquote>
+
+<hr>
+
+<h3>🔄 一、"读-析-写"三步工作流</h3>
+
+<p>这是 Claude Code 最核心的工作模式。把 AI 从"聊天工具"变成"生产力引擎"：</p>
+
+<p>``<code></p>
+<p>📥 读取 READ   → 让 AI 看见你的数据</p>
+<p>🔍 分析 ANALYZE → 让 AI 理解并挖掘洞察</p>
+<p>📝 生成 WRITE   → 让 AI 产出可交付的成果</p>
+</code>`<code>
+
+<strong>传统方式 vs AI 方式——同一个任务：</strong>
+
+<table><tr><th>环节</th><th>传统方式</th><th>AI 方式</th></tr><tr><td>读取</td><td>手动打开 Excel，筛选，排序</td><td>"读取 @数据.xlsx"</td></tr><tr><td>分析</td><td>自己做透视表，画图，找规律</td><td>"按 3 个维度分析趋势和异常"</td></tr><tr><td>生成</td><td>打开 Word/PPT，排版，写结论</td><td>"生成报告，保存为 .md 文件"</td></tr><tr><td><strong>总耗时</strong></td><td><strong>60-90 分钟</strong></td><td><strong>5-10 分钟 + 你审核微调</strong></td></tr></table>
+
+<hr>
+
+<h3>📊 二、实战拆解：一份售后服务月报的诞生</h3>
+
+<strong>场景：</strong> 你有本月 500 条服务工单数据，需要写月报向上级汇报。
+
+<strong>Step 1：读取</strong>
+<blockquote>"读取桌面上的 '8月服务工单.xlsx'，先告诉我这份数据的基本结构：有哪些列、共多少条记录、数据有没有明显缺失。"</blockquote>
+
+<p>AI 读取文件后告诉你：12 列，498 条，完成时间列有 23 条缺失。</p>
+
+<strong>你获得的价值：</strong> 不用打开 Excel 就知道数据全貌和数据质量问题。
+
+<strong>Step 2：分析</strong>
+<blockquote>"基于这份数据，分析以下维度：
+<p>1) 工单量日趋势（有没有异常高峰日）</p>
+<p>2) 处理时长分布（均值/中位数/超过 48h 的工单占比）</p>
+<p>3) 投诉类型 Top 5</p>
+<p>4) 按区域对比（哪个区域处理时长最长）</p>
+<p>每个维度给出关键发现和数据支撑。"</blockquote></p>
+
+<p>AI 逐维度给出分析，附带具体数字。</p>
+
+<strong>你获得的价值：</strong> 别人花 40 分钟做的分析，你 2 分钟拿到初版。
+
+<strong>Step 3：生成</strong>
+<blockquote>"把以上分析整理成月报，保存为 markdown 文件。结构：1)核心摘要（3 句话）2)关键指标仪表盘 3)问题分析 4)改善建议（按优先级排列）。语气正式，适合向上汇报。"</blockquote>
+
+<p>AI 生成完整的 .md 文件。</p>
+
+<strong>你获得的价值：</strong> 可交付的初稿。你只需要审核数据准确性、调整措辞、补充你的业务判断。
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 5 课：AI 的"手"——读析写工作流 (2/3)</h2>
+
+<h3>⚡ 三、进阶技巧：让 AI 帮你"审"</h3>
+
+<p>读-析-写之后，还有关键一步：<strong>审</strong>。这是高手和新手的区别。</p>
+
+</code>`<code>
+<p>📥 读取 → 🔍 分析 → 📝 生成 → ✅ 审核</p>
+</code>`<code>
+
+<strong>审什么？</strong>
+<p>- 逻辑一致性："检查报告中的数据和结论是否一致，有没有自相矛盾的地方"</p>
+<p>- 完整性："有没有遗漏重要维度？哪些地方需要更多数据支撑？"</p>
+<p>- 落地性："改善建议是否具体可执行？哪些建议需要更多前置条件？"</p>
+<p>- 受众适配："这份报告是给总监看的，语言是否够精炼？是否突出了他关心的指标？"</p>
+
+<strong>实战示例：</strong>
+<blockquote>"用总监的视角审视这份报告。他最关心的是：1)问题有没有被控制住 2)团队在不在改善轨道上 3)需要他做什么决策。请据此调整报告的侧重点。"</blockquote>
+
+<hr>
+
+<h3>🛡️ 四、安全与信任：Permission 系统详解</h3>
+
+<p>Claude Code 在执行操作前会弹窗请求你的许可。理解这个机制，你就能放心让 AI "动手"：</p>
+
+<table><tr><th>权限级别</th><th>触发场景</th><th>建议策略</th></tr><tr><td>🟢 无需确认</td><td>纯对话、分析</td><td>随意使用</td></tr><tr><td>🟡 读取文件</td><td>Read 工具</td><td>通常安全，直接允许</td></tr><tr><td>🟠 创建/修改文件</td><td>Write、Edit</td><td>看清楚文件名和路径再确认</td></tr><tr><td>🔴 执行命令</td><td>Bash</td><td>理解命令作用再允许，不确定就拒绝</td></tr><tr><td>🔴 网络请求</td><td>WebFetch、API 调用</td><td>确认不会泄露敏感数据</td></tr></table>
+
+<strong>三条安全铁律：</strong>
+<p>1. <strong>不清楚的命令不执行。</strong> 如果 AI 给出的 bash 命令你看不懂，先问"这个命令是做什么的？"</p>
+<p>2. <strong>敏感数据要脱敏。</strong> 让 AI 分析数据前，确认文件中没有身份证号、手机号等隐私信息</p>
+<p>3. <strong>重要文件先备份。</strong> 让 AI 大规模修改文件前，自己先做个备份</p>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 5 课：AI 的"手"——读析写工作流 (3/3)</h2>
+
+<h3>🎯 五、五个工作场景的读析写模板</h3>
+
+<strong>场景 1：客户服务运营</strong>
+</code>`<code>
+<p>读：读取 @本月工单.xlsx</p>
+<p>析：工单量趋势、处理时长分布、投诉分类、区域差异</p>
+<p>写：服务运营月报 + 3 条改善建议</p>
+</code>`<code>
+
+<strong>场景 2：渠道建设运营</strong>
+</code>`<code>
+<p>读：读取 @渠道Q3数据.csv</p>
+<p>析：各渠道转化率/客单价对比、高潜力渠道识别、低效渠道诊断</p>
+<p>写：渠道分层方案 + 差异化赋能策略</p>
+</code>`<code>
+
+<strong>场景 3：项目管理</strong>
+</code>`<code>
+<p>读：读取 @项目进度表.xlsx</p>
+<p>析：延期任务分析、资源冲突识别、风险概率评估</p>
+<p>写：项目健康度报告 + 风险应对方案</p>
+</code>`<code>
+
+<strong>场景 4：售后运营（ITR）</strong>
+</code>`<code>
+<p>读：读取 @ITR流程数据.xlsx</p>
+<p>析：各环节处理时长、断点分析、闭环率趋势</p>
+<p>写：ITR 流程诊断 + 优化路线图</p>
+</code>`<code>
+
+<strong>场景 5：组织建设</strong>
+</code>`<code>
+<p>读：读取 @能力评估.xlsx</p>
+<p>析：人才九宫格、梯队健康度、关键岗位风险</p>
+<p>写：人才盘点报告 + 梯队建设建议</p>
+</code>`<code>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>完成任务：你的第一个完整"读析写"循环</strong>
+
+</code>`<code>
+<p>1. 找一份你本周真实需要分析的工作数据（Excel/CSV/文档）</p>
+
+<p>2. 读取与分析：</p>
+<p>"读取 @[文件]，分析核心指标，找出 3 个最值得关注的数据发现"</p>
+
+<p>3. 生成成果：</p>
+<p>"把分析结果整理成一份简报，保存为 [文件名]-简报.md"</p>
+
+<p>4. 审核优化：</p>
+<p>"这份简报是给 [某位领导/同事] 看的，他的关注重点是 [X]，</p>
+<p>请调整侧重点，并检查数据逻辑是否一致"</p>
+</code>``
+
+<blockquote>💡 <strong>今日核心收获：读-析-写-审四步法是你未来每天都会用的工作流。花一周时间养成习惯，之后你的工作效率会进入一个全新的层级。AI 不是替你思考——它是把你的思考速度放大了 10 倍。</strong></blockquote>
+
+<hr>
+
+<h3>📝 第一周知识地图</h3>
+
+<table><tr><th>天数</th><th>核心能力</th><th>一句话总结</th></tr><tr><td>D1</td><td>AI 心智模型</td><td>AI = 模式匹配器，不是思考者</td></tr><tr><td>D2</td><td>Claude Code 能力全景</td><td>L1-L4 四层：聊→读→写→编排</td></tr><tr><td>D3</td><td>RFC Prompt 三段式</td><td>角色+格式+约束 = 精准输出</td></tr><tr><td>D4</td><td>上下文与 Memory</td><td>对话分三阶段，Memory 跨对话</td></tr><tr><td>D5</td><td>读析写工作流</td><td>读→析→写→审，效率 10 倍</td></tr></table>
+
+<blockquote>🎉 <strong>恭喜完成第一周！你已经从"AI 小白"升级为知道如何正确使用 AI 的入门者。下周一见！</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 下周一预告：Prompt 模式库——6 种万能模板，覆盖 90% 的工作场景</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第一周 · 周五</p>
+</div>
+</body>
+</html>
