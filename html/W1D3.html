@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>AI 学习之旅 · 第一周 · 周三</title>
+<style>
+:root {
+  --bg: #fafaf9; --card: #ffffff; --text: #1c1917; --text2: #57534e;
+  --accent: #2563eb; --accent2: #eff6ff; --border: #e7e5e4;
+  --tag-bg: #fef3c7; --tag-text: #92400e; --code-bg: #f5f5f4;
+  --success: #16a34a; --warning: #ea580c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c0a09; --card: #1c1917; --text: #fafaf9; --text2: #a8a29e;
+    --accent: #60a5fa; --accent2: #0f2b4a; --border: #292524;
+    --tag-bg: #422006; --tag-text: #fcd34d; --code-bg: #1c1917;
+    --success: #4ade80; --warning: #fb923c;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.85; font-size: 17px;
+  max-width: 720px; margin: 0 auto; padding: 24px 20px 60px; -webkit-font-smoothing: antialiased;
+}
+.header { text-align: center; padding: 28px 0 20px; border-bottom: 2px solid var(--border); margin-bottom: 28px; }
+.header .date-tag { display: inline-block; background: var(--accent2); color: var(--accent); padding: 4px 16px; border-radius: 20px; font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+.header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
+.header .subtitle { color: var(--text2); font-size: 14px; margin-top: 2px; }
+h2 { font-size: 22px; font-weight: 700; margin: 32px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+h3 { font-size: 19px; font-weight: 600; margin: 24px 0 8px; color: var(--accent); }
+p { margin: 12px 0; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--code-bg); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text2); }
+blockquote { border-left: 4px solid var(--accent); padding: 12px 20px; margin: 16px 0; background: var(--accent2); border-radius: 0 8px 8px 0; font-size: 16px; }
+code { background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-size: 14px; font-family: "SF Mono", "Fira Code", monospace; }
+pre { background: var(--code-bg); padding: 16px 20px; border-radius: 8px; overflow-x: auto; margin: 12px 0; font-size: 14px; line-height: 1.6; border: 1px solid var(--border); }
+ul, ol { padding-left: 24px; margin: 8px 0; }
+li { margin: 6px 0; }
+.practice-box { background: linear-gradient(135deg, var(--accent2), var(--card)); border: 2px solid var(--accent); border-radius: 16px; padding: 28px 24px; margin: 32px 0; }
+.practice-box h3 { color: var(--accent); margin-top: 0; }
+.tag { display: inline-block; background: var(--tag-bg); color: var(--tag-text); padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+.compare .bad { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 14px; }
+.compare .good { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 14px; }
+@media (prefers-color-scheme: dark) { .compare .bad { background: #3b1116; border-color: #7f1d1d; } .compare .good { background: #0a2e1a; border-color: #14532d; } }
+.progress-bar { display: flex; gap: 4px; margin: 20px 0; }
+.progress-bar .dot { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+.progress-bar .dot.done { background: var(--accent); }
+.progress-bar .dot.current { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+.footer { text-align: center; padding: 28px 0 0; color: var(--text2); font-size: 14px; border-top: 1px solid var(--border); margin-top: 36px; }
+hr { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+.font-info { color: var(--accent); font-size: 14px; }
+@media (max-width: 600px) { body { font-size: 16px; padding: 16px 16px 40px; } .header h1 { font-size: 24px; } h2 { font-size: 20px; } .compare { grid-template-columns: 1fr; } table { font-size: 13px; } th, td { padding: 8px 10px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="date-tag">第一周 · 周三</div>
+  <h1>AI 学习之旅</h1>
+  <div class="subtitle">第 3 天 · Phase 1 · 预计阅读 30 分钟</div>
+</div>
+<div class="progress-bar"><div class="dot done"></div><div class="dot done"></div><div class="dot done"></div><div class="dot "></div><div class="dot "></div></div>
+<h2>第 3 课：Prompt 三段式 RFC 法则 (1/3)</h2>
+
+<blockquote>为什么同样的 AI，高手产出是你的 3-5 倍？答案全在 Prompt 结构</blockquote>
+
+<hr>
+
+<h3>🎯 一、一个对比，看清差距</h3>
+
+<strong>场景：你要分析本月的客户投诉数据，找根因。</strong>
+
+<p>❌ <strong>初学者 Prompt：</strong></p>
+<blockquote>"帮我分析一下这些投诉数据。"</blockquote>
+
+<p>AI 输出：泛泛的分类，随便列了几个原因，没什么用。耗时 10 分钟，结论不可用。</p>
+
+<p>✅ <strong>结构化 Prompt：</strong></p>
+<blockquote>"你是售后服务数据分析师。请分析以下投诉数据，从三个维度入手：1)投诉类型分布（按数量排序）2)各类型同比变化趋势 3)处理时长异常值。每个维度找出最关键的 2-3 个发现。输出格式：先给一段 100 字以内的摘要，然后用表格列出具体数据，最后给出 3 条优先级排序的改善建议。"</blockquote>
+
+<p>AI 输出：精准、结构化、可直接用于汇报。耗时同样 10 分钟，结论可落地。</p>
+
+<strong>差别在哪里？</strong> 不在于 AI 的能力，在于你给了它多少"脚手架"。
+
+<hr>
+
+<h3>🏗️ 二、RFC 三段式：一个万能的 Prompt 框架</h3>
+
+<p>``<code></p>
+<p>R — Role（角色）：告诉 AI "你是谁"</p>
+<p>F — Format（格式）：告诉 AI "怎么输出"</p>
+<p>C — Constraint（约束）：告诉 AI "有什么限制"</p>
+</code>`<code>
+
+<p>这就像一个招聘 JD。你招一个分析师，JD 越清晰，招到的人越匹配。用 AI 同理。</p>
+
+<hr>
+
+<strong>R - Role 角色的力量</strong>
+
+<p>AI 的知识库里包含了各种专业领域的语言模式。指定角色 = 激活对应的"知识区"。</p>
+
+<p>❌ "分析服务流程" → AI 用通用模式回答</p>
+<p>✅ "你是拥有 10 年经验的 ITIL 服务管理顾问" → AI 用专业术语和框架回答</p>
+<p>✅ "你是一线客服人员，从执行层视角分析" → AI 用接地气的实操语言</p>
+
+<strong>同一个人、同一个问题、不同角色 → 三种完全不同的输出。</strong>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 2 →</span>
+
+
+
+<h2>第 3 课：Prompt 三段式 RFC 法则 (2/3)</h2>
+
+<h3>📐 F - Format 格式：决定输出的可用性</h3>
+
+<p>格式是 Prompt 中最被低估但最关键的元素。同样的分析内容：</p>
+
+<table><tr><th>格式</th><th>适用场景</th><th>示例指令</th></tr><tr><td>要点列表</td><td>快速了解、内部沟通</td><td>"用 5 个 bullet points 总结"</td></tr><tr><td>Markdown 表格</td><td>数据对比、多维度分析</td><td>"用表格对比，列=渠道名/转化率/客单价/评估"</td></tr><tr><td>JSON 结构</td><td>需要进一步程序处理</td><td>"输出 JSON 格式，字段包含..."</td></tr><tr><td>报告模板</td><td>向上汇报、正式场合</td><td>"按'背景-发现-建议-下一步'四段式输出"</td></tr><tr><td>邮件草稿</td><td>对外/跨部门沟通</td><td>"写成邮件草稿，语气正式但不过于生硬"</td></tr></table>
+
+<strong>实战技巧：不确定用什么格式？直接说"用表格+要点结合的方式，表格做对比，要点做总结。"</strong>
+
+<hr>
+
+<h3>⛓️ C - Constraint 约束：让 AI 不跑偏</h3>
+
+<p>约束是多层防护网，确保 AI 输出在你要的轨道上：</p>
+
+<strong>维度约束：</strong> "从以下 3 个维度分析：时效性、准确性、客户满意度"
+<strong>数量约束：</strong> "每个维度给出 3 个具体建议，每个建议不超过 50 字"
+<strong>范围约束：</strong> "只分析 Q3 数据，不涉及 Q4 预测"
+<strong>风格约束：</strong> "用一线客服能听懂的语言，不要用专业术语"
+<strong>禁止约束：</strong> "不要给出需要额外预算的建议"
+
+<strong>⚠️ 注意：约束越多，AI 可能越"紧"。初学者可以先少约束看效果，再逐步收窄。</strong>
+
+<hr>
+
+<h3>🧩 三、RFC 应用实战：你的工作场景速查</h3>
+
+<table><tr><th>你的工作场景</th><th>R（角色）</th><th>F（格式）</th><th>C（约束）</th></tr><tr><td>服务工单分析</td><td>客服数据运营专家</td><td>表格+要点</td><td>关注处理时长>48h的异常工单</td></tr><tr><td>渠道分层</td><td>渠道策略顾问</td><td>四象限矩阵</td><td>按"能力×意愿"两个维度分4层</td></tr><tr><td>SOP 设计</td><td>流程管理顾问</td><td>分阶段流程图</td><td>每阶段3-5个节点，含负责人</td></tr><tr><td>ITR 诊断</td><td>ITIL 服务管理顾问</td><td>问题-根因-对策表</td><td>按客户视角梳理，非内部视角</td></tr><tr><td>人才盘点</td><td>组织发展专家</td><td>九宫格+分析</td><td>重点关注高潜和需改善两端</td></tr></table>
+
+<hr>
+<span class="font-info">📖 继续阅读 Part 3 →</span>
+
+
+
+<h2>第 3 课：Prompt 三段式 RFC 法则 (3/3)</h2>
+
+<h3>🧪 四、最常见的 Prompt 错误（及纠正）</h3>
+
+<strong>错误 1：角色太模糊</strong>
+<p>❌ "帮我看看这个"</p>
+<p>✅ "你是数据分析师，帮我检查这份数据的一致性和异常值"</p>
+
+<strong>错误 2：没有指定格式</strong>
+<p>❌ "分析下渠道情况" → AI 给你一段长文，没法直接用</p>
+<p>✅ "用表格列出各渠道的 3 个核心指标，加一列'风险等级'"</p>
+
+<strong>错误 3：约束太少</strong>
+<p>❌ "写个周报" → AI 写的周报和你团队的格式完全不同</p>
+<p>✅ "按以下结构写周报：1)本周完成（3-5条）2)问题与风险 3)下周计划。总字数 300 以内，用 markdown。"</p>
+
+<strong>错误 4：约束太多太死</strong>
+<p>❌ "角色=XX，格式=XX，字数=XX，语气=XX，不要XX，必须XX..." → AI 被绑死，输出僵硬</p>
+<p>✅ 给 2-3 个关键约束即可，其他的通过迭代对话补充</p>
+
+<hr>
+
+<h3>🏋️ 今日练习（到公司后 10 分钟）</h3>
+
+<strong>挑一个你本周最实际的待办事项，套用 RFC 框架：</strong>
+
+<strong>STEP 1：写 RFC Prompt</strong>
+</code>`<code>
+<p>你是 [角色]</p>
+<p>请 [具体做什么]</p>
+<p>从以下 [N] 个维度分析：[维度1/2/3]</p>
+<p>输出格式：[表格/报告/要点]</p>
+<p>约束：[字数/范围/其他]</p>
+</code>``
+
+<strong>STEP 2：执行并评估</strong>
+<p>- AI 的输出是否符合你的预期？（1-10 打分）</p>
+<p>- 少了什么？是 RFC 哪个部分没写清楚？</p>
+<p>- 多了什么？是不是约束不够？</p>
+
+<strong>STEP 3：迭代一次</strong>
+<p>把刚才的 Prompt 调整一个地方（换角色/加格式/收紧约束），再执行一次。</p>
+<strong>观察：只改了一处，输出有多大变化？</strong>
+
+<blockquote>💡 <strong>今日核心收获：RFC 是你和 AI 高效协作的基础语言。花 2 分钟想清楚 R-F-C，能省 20 分钟来回改。养成习惯：每次提问前，脑子里过一遍——角色、格式、约束。</strong></blockquote>
+
+<hr>
+<span class="font-info">📅 明日预告：上下文窗口的奥秘——多轮对话的正确姿势，让 AI 不"失忆"</span>
+
+<div class="footer">
+  <p>💡 到公司后用 10 分钟在 Claude Code 中完成练习，效果加倍！</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--text2);">AI 学习之旅 · 第一周 · 周三</p>
+</div>
+</body>
+</html>
